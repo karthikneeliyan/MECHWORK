@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- website Details for search engine's -->
+  <title>The Mech Work</title>
+  <meta name="description" content="JMECH-Details">
+  <meta name="keywords" content="JMECH descriptions">
+  <meta name="author" content="JMECH-email">
+  <!-- Brand Image -->
+  <!-- <link rel="icon" href="img/logo.png"> -->
+  <!-- Bootstrap and core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+  <!-- Data Tables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+  <!--  My Stylesheet -->
+  <link rel="stylesheet" href="css/style2.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- sidebar -->
+    <nav id="sidebar" class="active">
+      <div class="sidebar-header">
+        <h3>The Mech Work</h3>
+        <strong>TMW</strong>
+      </div>
+      <!-- sidebar links -->
+      <ul class="list-unstyled components">
+        <li data-toggle="tooltip" data-placement="right" title="Home">
+          <a href="admin-home.html">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        <li data-toggle="tooltip" data-placement="right" title="College Portal">
+          <a href="admin-college.html">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <span class="menu-title">College</span>
+          </a>
+        </li>
+        <li class="active" data-toggle="tooltip" data-placement="right" title="Corporate Portal">
+          <a href="admin-corporate.html">
+            <i class="fa fa-building" aria-hidden="true"></i>
+            <span class="menu-title">corporate</span>
+          </a>
+        </li>
+        <li data-toggle="tooltip" data-placement="right" title="Publish Jobs">
+          <a href="admin-jobs.html">
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <span class="menu-title">Publish Job</span>
+          </a>
+        </li>
+        <li data-toggle="tooltip" data-placement="right" title="Create Events">
+          <a href="admin-events.html">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span class="menu-title">Events</span>
+          </a>
+        </li>
+        <li data-toggle="tooltip" data-placement="right" title="Logout">
+          <a href="login.html">
+            <i class="fa fa-power-off" aria-hidden="true"></i>
+            <span class="menu-title">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="content-container">
+      <div class="content">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand page-scroll pull-right" href="#page-top">
+                Corporate Portal
+              </a>
+              <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn m-r-20">
+                <i class="glyphicon glyphicon-align-left"></i>
+              </button>
+            </div>
+
+          </div>
+        </nav>
+
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="card">
+                <div class="card-title">
+                  <h5 class="l-h-30">
+                    List of companies
+                    <a href="#corporate" class="btn btn-default btn-sm btn-outline pull-right page-scroll">Add Corporate</a>
+                  </h5>
+
+                </div>
+
+                <div class="table-responsive">
+                  <table id="example" class="table table-striped display" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Corporate</th>
+                        <th>Description</th>
+                        <th>Image URL</th>
+                        <th>Website</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Est.</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                                                
+                                             
+                                                    include 'db.php';
+                                                    include 'update.php';
+                                                    $sql = "SELECT  college_name,description,logo, url,primary_contact_no,email_id,address,row_id FROM college_details ";
+                                                    $result="";
+                                                    $result = $mysqli->query($sql);
+                                                    
+                                                    $row=mysqli_fetch_array($result);
+                                                    
+                                                    foreach ($result as $data)
+                                                    // using foreach to display each element of array
+                                                    {
+                                                        
+                                                        echo "<tr id='tr1'><td>" . $data['college_name'] . "</td>
+                                                                  <td>" . $data['description'] . "</td>
+                                                                  <td>".'<img src="data:image/jpeg;base64,'.($data['logo'] ).' " height="20" width="50"/>'. "</td>
+                                                                  <td>" . $data['url'] . "</td>
+                                                                  <td>" . $data['primary_contact_no'] . "</td>
+                                                                  <td>" . $data['email_id'] . "</td>
+                                                                  <td>" . $data['address'] . '</td>
+                                                                  <td><span class="text-success">Active</span></td>
+                                                                <td><a href="#"   id=" '.$data['row_id'] .'" class="label label-success update"><span ><i
+                                        															class="fa fa-pencil" aria-hidden="true"></i></span></a> <a
+                                        													href="#" class="label label-danger delete"><span  onclick="delete_college(this.id)"id="delete' . $data['row_id'] . '"><i
+                                        															class="fa fa-times" aria-hidden="true"></i></span></a></td>
+                                                               </tr>';
+                                                    }
+                                                    
+                                                
+                                               
+                                                ?>
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <br/>
+
+          <div id="corporate" class="row">
+
+            <div class="col-xs-12">
+              <div class="card">
+                <div class="card-title">
+                  <h5>
+                    Add New Comapny
+                  </h5>
+
+                </div>
+
+                <div>
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="companyName" class="col-sm-2 control-label">Company Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="company_Name" placeholder="Enter the college name..">
+                        <div class="company_Name-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="description" class="col-sm-2 control-label">Description</label>
+                      <div class="col-sm-10">
+                        <textarea type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="company_description"
+                          rows="3" placeholder="Enter the college description.."></textarea>
+                        <div class="company_description-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="image" class="col-sm-2 control-label">Image</label>
+                      <div class="col-sm-10">
+                        <input type="file" name="pic" id="company_image" accept="image/*">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="websiteUrl" class="col-sm-2 control-label">Website URL</label>
+                      <div class="col-sm-10">
+                        <input type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="company_websiteUrl"
+                          placeholder="Enter the college website url..">
+                        <div class="company_websiteUrl-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="contact" class="col-sm-2 control-label">Contact Number</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control input-sm" id="company_contact" placeholder="Enter the college contact number..">
+                        <div class="company_contact-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="emailID" class="col-sm-2 control-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control input-sm" id="company_emailID" placeholder="Enter the college email address..">
+                        <div class="company_emailID-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="address" class="col-sm-2 control-label">Address</label>
+                      <div class="col-sm-10">
+                        <input type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="company_address"
+                          placeholder="Enter the college address..">
+                        <div class="company_address-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="establishmentYear" class="col-sm-2 control-label">Year of Establishment</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control input-sm" id="company_establishmentYear" placeholder="Enter the establishment year..">
+                        <div class="company_establishmentYear-alert" style="color: red; display:none;">Please enter valid college name
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button id="add_company" type="button" class="btn btn-default btn-width btn-success">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="line"></div>
+        </div>
+
+      </div>
+
+      <div id="footer">
+        <div class="container-fluid">
+          <p>©2016 All Rights Reserved</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal fade" id="deleteCollege" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                <p>
+                  Are you sure, you want to delete the college?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="canceled-btn" type="button" class="btn btn-sm btn-default btn-width btn-success" data-dismiss="modal">Yes</button>
+          <button id="" type="button" class="btn btn-sm btn-default btn-width btn-danger" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- College update -->
+  <div class="modal fade" id="updateCollege" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Update Details</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="collegeName" class="col-sm-2 control-label">Company Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="update_company_Name"
+                        value="">
+                      <div class="update_company_Name-alert" style="color: red; display:none;">Please enter company name.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                      <textarea type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="update_company_description"
+                        rows="3" value="Description will be added here about the colleges."></textarea>
+                      <div class="update_company_description-alert" style="color: red; display:none;">Please enter description.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="image" class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-10">
+                      <input type="file" id="update_company_image" name="pic" accept="image/*">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="websiteUrl" class="col-sm-2 control-label">Website URL</label>
+                    <div class="col-sm-10">
+                      <input type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="update_company_websiteUrl"
+                        value="http://www.pit.ac.in/">
+                      <div class="update_company_websiteUrl-alert" style="color: red; display:none;">Please enter url
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="contact" class="col-sm-2 control-label">Contact Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control input-sm" id="update_company_contact" value="044-26491113">
+                      <div class="update_company_contact-alert" style="color: red; display:none;">Please enter valid contact number
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="emailID" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control input-sm" id="update_company_emailID" value="info@pit.ac.in">
+                      <div class="update_company_emailID-alert" style="color: red; display:none;">Please enter valid college name
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="address" class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-10">
+                      <input type="text" onkeyup="isEmpty(this.id)" onblur="isEmpty(this.id)" class="form-control input-sm" id="update_company_address"
+                        value="Panimalar Institute of Technology, No.391, Bangalore Trunk Road, Varadharajapuram,Poonamallee, Chennai - 600 123.">
+                      <div class="update_company_address-alert" style="color: red; display:none;">Please enter address
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="establishmentYear" class="col-sm-2 control-label">Year of Estalishment</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control input-sm" id="update_company_establishmentYear" value="1998">
+                      <div class="update_company_establishmentYear-alert" style="color: red; display:none;">Please enter valid college name
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="canceled-btn" type="button" class="btn btn-sm btn-default btn-width btn-success" data-dismiss="modal">Update</button>
+          <button id="" type="button" class="btn btn-sm btn-default btn-width btn-danger" data-dismiss="modal">Discard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- College Submission -->
+  <div class="modal fade" id="submitCollege" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12">
+                <p>
+                  Are you sure, you want to submit the college details?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="canceled-btn" type="button" class="btn btn-sm btn-default btn-width btn-success" data-dismiss="modal">Submit</button>
+          <button id="" type="button" class="btn btn-sm btn-default btn-width btn-danger" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="success" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div id ="success_text" class="col-xs-12">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <button id="college_register_reload" type="button" class="btn btn-sm btn-default btn-width btn-danger reload" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div
+  <input type="hidden" id="hdntr" />
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Datatable scripts -->
+  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+  <!-- 3rd Party JS's -->
+  <script src="js/wow.min.js"></script>
+  <!-- Our own Js Files -->
+  <script>
+    $(document).ready(function () {
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+      })
+
+      $('.reload').click(function () {
+        total_errors.forEach(function (keys) {
+          hideError(keys);
+        });
+        window.location.reload();
+      });
+
+
+      $('[data-toggle="tooltip"]').tooltip()
+
+      //DataTable
+      $('#example').DataTable({
+        dom: 'Bfrtip',
+        searching: false,
+        columnDefs: [{
+            "width": "15%",
+            "targets": 3
+          },
+          {
+            "width": "10%",
+            "targets": 5
+          }
+        ]
+      });
+      //update
+      $('.update').click(function () {
+        var id = $(this).closest('tr').attr('id');
+        $('#updateCollege').modal({
+          show: true
+        });
+      });
+      //delete 
+      $('.delete').click(function () {
+        var id = $(this).closest('tr').attr('id');
+        $('#hdntr').val(id);
+        $('#deleteCollege').modal({
+          show: true
+        });
+      });
+      //submit 
+      $('#btnSubmit').click(function () {
+        var id = $(this).closest('tr').attr('id');
+        $('#hdntr').val(id);
+        $('#submitCollege').modal({
+          show: true
+        });
+      });
+      $('#canceled-btn').click(function () {
+        $("#" + $('#hdntr').val() + '').hide();
+      });
+      $('.main-content').addClass('animated zoomIn');
+
+    })
+    $('#add_company').click(function (event) {
+
+
+
+      var vallidationFlag = true;
+      //to check the validation creteria throughout all fields of updation
+      for (var key in errors) {
+        if (errors.hasOwnProperty(key)) {
+          {
+            if (errors[key] == false) {
+              vallidationFlag = false;
+              break;
+            }
+          }
+        }
+      }
+
+      if (vallidationFlag) {
+
+
+
+
+
+
+        var data = {
+          "company_Name": "",
+          "company_description": "",
+          "company_websiteUrl": "",
+          "company_contact": "",
+          "company_emailID": "",
+          "company_address": "",
+          "company_image": ""
+        };
+        data.company_Name = $('#company_Name').val();
+        data.company_description = $('#company_description').val();
+        data.company_image = $('#company_image').val();
+
+        data.company_websiteUrl = $('#company_websiteUrl').val();
+        data.company_contact = $('#company_contact').val();
+        data.company_emailID = $('#company_emailID').val();
+        data.company_address = $('#company_address').val();
+        var isValid = true;
+        var flag = true;
+
+
+
+        $.ajax({
+          type: "POST",
+          url: "register.php",
+          data: ({
+            'data': data,
+            'flag': flag
+          }),
+          success: function (msg) {
+
+            var data = JSON.parse(msg);
+            if (data.flag === "success") {
+              $('#add_company_form')[0].reset();
+              $('#success_text').html('');
+              $('#success_text').html('<p> Company details  added successfully </p>');
+              $('#success').modal({
+                show: true
+              });
+
+            }
+            if (data.flag === "failed") {
+              $('#add_company_form')[0].reset();
+
+
+            }
+
+            //alert( "Data Saved: " + msg );
+          }
+
+        });
+
+      } else {
+        for (var key in errors) {
+          if (errors.hasOwnProperty(key)) {
+
+            if (errors[key] == false) {
+              showError(key);
+            } else {
+              hideError(key);
+            }
+
+          }
+        }
+      }
+
+    });
+
+    $('#add_college').click(function (event) {
+
+
+      var vallidationFlag = true;
+      //to check the validation creteria throughout all fields of updation
+      for (var key in errors) {
+        if (errors.hasOwnProperty(key)) {
+          {
+            if (errors[key] == false) {
+              vallidationFlag = false;
+              break;
+            }
+          }
+        }
+      }
+
+      if (vallidationFlag) {
+
+        var data = {
+          "college_name": "",
+          "college_description": "",
+          "college_website_url": "",
+          "college_contact": "",
+          "college_emailID": "",
+          "college_address": "",
+          "college_image": ""
+        };
+        data.college_name = $('#college_name').val();
+        data.college_description = $('#college_description').val();
+        data.college_image = $('#college_image').val();
+
+        data.college_website_url = $('#college_website_url').val();
+        data.college_contact = $('#college_contact').val();
+        data.college_emailID = $('#college_emailID').val();
+        data.college_address = $('#college_address').val();
+        var isValid = true;
+        var flag = true;
+
+
+
+        $.ajax({
+          type: "POST",
+          url: "register.php",
+          data: ({
+            'data': data,
+            'flag': flag
+          }),
+          success: function (msg) {
+
+            var data = JSON.parse(msg);
+            if (data.flag === "success") {
+              $('#add_college_form')[0].reset();
+              $('#success_text').html('');
+              $('#success_text').html('<p> College details  added successfully </p>');
+              $('#add_college_success').modal({
+                show: true
+              });
+
+            }
+            if (data.flag === "failed") {
+              $('#add_college_form')[0].reset();
+
+
+            }
+
+            //alert( "Data Saved: " + msg );
+          }
+
+        });
+
+      } else {
+        for (var key in errors) {
+          if (errors.hasOwnProperty(key)) {
+
+            if (errors[key] == false) {
+              showError(key);
+            } else {
+              hideError(key);
+            }
+
+          }
+        }
+      }
+
+    });
+
+
+    $('#update_company_details').click(function () {
+
+
+
+      var vallidationFlag = true;
+      //to check the validation creteria throughout all fields of updation
+      for (var key in errors) {
+        if (errors.hasOwnProperty(key)) {
+          {
+            if (errors[key] == false) {
+              vallidationFlag = false;
+              break;
+            }
+          }
+        }
+      }
+
+      if (vallidationFlag) {
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+        var updated_data = {
+          "update_company_Name": "",
+          "update_company_description": "",
+          "update_company_websiteUrl": "",
+          "update_company_contact": "",
+          "update_emailID": "",
+          "update_company_address": "",
+          "update_company_image": "",
+          "update_company_establishmentYear"
+        };
+
+        updated_data.update_company_Name = $('#update_company_Name').val();
+        updated_data.update_company_description = $('#update_company_description').val();
+        updated_data.update_company_websiteUrl = $('#update_company_websiteUrl').val();
+        updated_data.update_company_image = $('#update_company_image').val();
+        updated_data.update_company_contact = $('#update_company_contact').val();
+        updated_data.update_emailID = $('#update_emailID').val();
+        updated_data.update_company_address = $('#update_company_address').val();
+        updated_data.update_company_establishmentYear = $('#update_company_establishmentYear').val();
+
+        
+        $.ajax({
+          type: "POST",
+          url: "company_update.php",
+          data: ({
+            'updated_data': updated_data,
+            "row_id": update_user_id
+          }),
+          success: function (msg) {
+            $('#success_text').html('');
+            $('#success_text').html('<p> Company details updated successfully </p>');
+            $('#success').modal({
+              show: true
+            });
+
+            $('#updateCompany').modal('toggle');
+            //alert( "Data Saved: " + msg );
+          }
+        });
+
+      } else {
+        for (var key in errors) {
+          if (errors.hasOwnProperty(key)) {
+
+            if (errors[key] == false) {
+              showError(key);
+            } else {
+              hideError(key);
+            }
+
+          }
+        }
+      }
+
+
+
+      //$("#" + $('#hdntr').val() + '').hide();
+    });
+    $('.main-content').addClass('animated zoomIn');
+
+    })
+
+    //update
+    $('.update').click(function (id) {
+      update_user_id = this.id;
+      var updateValidation = {
+        "update_collegeName": true,
+        "update_description": true,
+        "update_websiteUrl": true,
+        "update_contact": true,
+        "update_emailID": true,
+        "update_address": true,
+
+      };
+      initValidationFields(updateValidation);
+
+
+
+      $.ajax({
+        type: "POST",
+        url: "update.php",
+        data: ({
+          'user_id': update_user_id
+        }),
+        success: function (msg) {
+          var data = JSON.parse(msg);
+          $('#update_collegeName').val(data.college_name);
+          $('#update_description').val(data.description);
+          $('#update_websiteUrl').val(data.url);
+          $('#update_contact').val(data.primary_contact_no);
+          $('#update_image').val(data.logo);
+          $('#update_emailID').val(data.email_id);
+          $('#update_address').val(data.address);
+
+          //alert( "Data Saved: " + msg );
+        }
+      });
+
+      var id = $(this).closest('tr').attr('id');
+      $('#updateCollege').modal({
+        show: true
+      });
+    });
+
+    function delete_college(id) {
+      delete_id = id.replace(/delete/g, '');;
+      $('#cancelAppointment').modal({
+        show: true
+      });
+      $('#delete-college-btn').click(function () {
+        /*  var id = $(this).closest('tr').attr('id');
+         $('#hdntr').val(id);
+         $('#cancelAppointment').modal({
+           show: true
+         }); */
+        $.ajax({
+          type: "POST",
+          url: "college_delete.php",
+          data: ({
+            'delete_id': delete_id
+          }),
+          success: function (msg) {
+            $('#cancelAppointment').modal('toggle');
+          }
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>

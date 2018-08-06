@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- website Details for search engine's -->
+    <title>The Mech Work</title>
+    <meta name="description" content="JMECH-Details">
+    <meta name="keywords" content="JMECH descriptions">
+    <meta name="author" content="JMECH-email">
+    <!-- Brand Image -->
+    <!-- <link rel="icon" href="img/logo.png"> -->
+    <!-- Bootstrap and core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <!--  My Stylesheet -->
+    <link rel="stylesheet" href="css/style2.css">
+  </head>
+  
+  <body>
+    <!-- Navbar -->
+
+    <div class="wrapper">
+      <!-- sidebar -->
+      <nav id="sidebar" class="active">
+        <div class="sidebar-header">
+          <h3>The Mech Work</h3>
+          <strong>TMW</strong>
+        </div>
+        <!-- sidebar links -->
+        <ul class="list-unstyled components">
+          <li class="active"  data-toggle="tooltip" data-placement="right" title="Home">
+            <a href="admin-home.html">
+              <i class="fa fa-home" aria-hidden="true"></i>
+              <span class="menu-title">Home</span>
+            </a>
+          </li>
+          <li data-toggle="tooltip" data-placement="right" title="College Portal">
+            <a href="admin-college.html">
+              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+              <span class="menu-title">College</span>
+            </a>
+          </li>
+          <li data-toggle="tooltip" data-placement="right" title="corporate Portal">
+            <a href="admin-corporate.html">
+              <i class="fa fa-building" aria-hidden="true"></i>
+              <span class="menu-title">corporate</span>
+            </a>
+          </li>
+          <li data-toggle="tooltip" data-placement="right" title="Publish Jobs">
+            <a href="admin-jobs.html">
+              <i class="fa fa-briefcase" aria-hidden="true"></i>
+              <span class="menu-title">Publish Job</span>
+            </a>
+          </li>
+          <li data-toggle="tooltip" data-placement="right" title="Create Events">
+            <a href="admin-events.html">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <span class="menu-title">Events</span>
+            </a>
+          </li>
+          <li data-toggle="tooltip" data-placement="right" title="Logout">
+            <a href="login.html">
+              <i class="fa fa-power-off" aria-hidden="true"></i>
+              <span class="menu-title">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div id="content">
+
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand page-scroll pull-right" href="#page-top">
+                Dashboard
+              </a>
+              <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn m-r-20">
+                <i class="glyphicon glyphicon-align-left"></i>
+              </button>              
+            </div>
+
+          </div>
+        </nav>
+
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-xs-6 col-sm-4">
+              <div class="card-container">
+                <div class="first-half">
+                  <h1>10</h1>
+                  <h2>Colleges</h2>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="line"></div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- 3rd Party JS's -->
+    <script src="js/wow.min.js"></script>
+    <!-- Our own Js Files -->
+    <script>
+      $(document).ready(function(){
+        $('#sidebarCollapse').on('click', function(){
+          $('#sidebar').toggleClass('active');
+        })
+      })
+    </script>
+  </body>
+</html>
